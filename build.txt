@@ -1,0 +1,3 @@
+displayName = Hunger for Terraria
+author = Jong
+version = 0.1
