@@ -9,13 +9,13 @@ using Terraria.ModLoader;
 
 namespace HungerMode.Items
 {
-    class CherryPie: ModItem
-    {
-        public override void SetStaticDefaults()
-        {
+	class CherryPie : ModItem
+	{
+		public override void SetStaticDefaults()
+		{
 			DisplayName.SetDefault("Cherry Pie");
-            Tooltip.SetDefault("Delicious pie, leaves you full for 10 minutes.");
-        }
+			Tooltip.SetDefault("Delicious pie, leaves you full for 10 minutes.");
+		}
 
 		public override void SetDefaults()
 		{
@@ -44,7 +44,7 @@ namespace HungerMode.Items
 
 		public override bool UseItem(Player player)
 		{
-			// 360 -> 1 minute. 
+			// 3600 -> 1 minute. 
 			player.AddBuff(mod.BuffType("HungerModeBuff"), 3600 * 10);
 			return base.UseItem(player);
 		}

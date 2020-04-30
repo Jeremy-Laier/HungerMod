@@ -9,7 +9,7 @@ using Terraria.ID;
 
 namespace HungerMode.Buffs
 {
-    class HungerModeBuff: ModBuff
+    class HungerModeBuff : ModBuff
     {
         public override void SetDefaults()
         {
