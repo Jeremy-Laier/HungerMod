@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
+﻿using Terraria;
 using Terraria.ModLoader;
-using Terraria.ID;
 
 namespace HungerMode.Buffs
 {
@@ -13,12 +7,28 @@ namespace HungerMode.Buffs
     {
         public override void SetDefaults()
         {
-            DisplayName.SetDefault("Satiated");
-            Description.SetDefault("You are not hungry.");
+            DisplayName.SetDefault("Starving");
+            Description.SetDefault("You are weaker while you starve.");
+            Main.debuff[Type] = false; // needed so nurse will not remove this buff 
+            longerExpertDebuff = true;
         }
+
         public override void Update(Player player, ref int buffIndex)
         {
-            player.moveSpeed += 5f;
+            HungryPlayer p = player.GetModPlayer<HungryPlayer>();
+            if (!p.isHungry)
+            {
+                player.meleeDamage -= player.meleeDamage * 0.10f;
+                player.statDefense -= player.statDefense * (int)0.10;
+                player.GetModPlayer<HungryPlayer>().isHungry = true;
+
+                int buf = mod.BuffType("HungerModeBuff");
+                player.AddBuff(buf, 3600 * 10);
+            } 
+            else
+            {
+                // fails if we get here, log something
+            }
         }
     }
 }

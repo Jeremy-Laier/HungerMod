@@ -27,6 +27,11 @@ namespace HungerMode.Items
 			item.useStyle = ItemUseStyleID.EatingUsing;
 			item.rare = 2;
 			item.consumable = true;
+			item.buffType = mod.BuffType("HungerModeBuff");
+			item.buffTime = 3600 * 10;
+			item.noMelee = true;
+			item.notAmmo = true;
+			// item.potion = true;
 			item.maxStack = 10;
 			item.healLife = 25;
 			item.UseSound = SoundID.Item3;
@@ -37,15 +42,11 @@ namespace HungerMode.Items
 			healValue = 25;
 		}
 
-		public override bool CanUseItem(Player player)
-		{
-			return !player.HasBuff(mod.BuffType("HungerModeBuff"));
-		}
-
 		public override bool UseItem(Player player)
 		{
-			// 3600 -> 1 minute. 
-			player.AddBuff(mod.BuffType("HungerModeBuff"), 3600 * 10);
+			HungryPlayer p = player.GetModPlayer<HungryPlayer>();
+			p.isHungry = false;
+			// player.AddBuff(mod.BuffType("HungerModeBuff"), 3600 * 10);
 			return base.UseItem(player);
 		}
 	}
